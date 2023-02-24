@@ -8,6 +8,7 @@ import {
   Subject,
   of,
   concat,
+  merge,
 } from "rxjs";
 import { map, filter } from "rxjs/operators";
 import { createHttpObservable } from "../common/util";
@@ -58,19 +59,33 @@ export class AboutComponent implements OnInit {
     //   ()=> console.log("completed...")
     // );
 
-    // ###############################
-    //           CONCAT
-    // ###############################
-
-    /**
-     * Subscribes to the next observable only if current observable COMPLETES
+    /** ###############################
+     *           CONCAT
+     *  ###############################
+     *
+     *  Subscribes to the next observable only if current observable COMPLETES
      */
-    // const source1$ = interval(1000); // Will not subscribe next source because it never completes
-    const source1$ = of(1, 2, 3);
-    const source2$ = of(4, 5, 6);
-    const source3$ = of(7, 8, 9);
 
-    const result$ = concat(source1$, source2$, source3$);
+    // const source1$ = interval(1000); // Will not subscribe next source because it never completes
+    // const source1$ = of(1, 2, 3);
+    // const source2$ = of(4, 5, 6);
+    // const source3$ = of(7, 8, 9);
+
+    // const result$ = concat(source1$, source2$, source3$);
+    // result$.subscribe(console.log);
+
+    /** ###############################
+     *           MERGE
+     *  ###############################
+     *
+     * Subscribes to the next observable concurrently with the initial observable
+     */
+
+    const interval1$ = interval(1000);
+    const interval2$ = interval1$.pipe(map((val) => 10 * val));
+
+    const result$ = merge(interval1$, interval2$);
+
     result$.subscribe(console.log);
   }
 }
