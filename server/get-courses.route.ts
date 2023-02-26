@@ -13,6 +13,7 @@ export function getAllCourses(req: Request, res: Response) {
     // res.status(500).json({ message: "error occured!" });
   }, 200);
   // }
+
 }
 
 export function getCourseById(req: Request, res: Response) {

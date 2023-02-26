@@ -97,3 +97,9 @@ export class AboutComponent implements OnInit {
     setTimeout(() => sub.unsubscribe(), 0);
   }
 }
+
+
+
+
+
+

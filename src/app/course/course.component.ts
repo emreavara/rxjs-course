@@ -83,4 +83,4 @@ export class CourseComponent implements OnInit, AfterViewInit {
       `/api/lessons?courseId=${this.courseId}&pageSize=100&filter=${search}`
     ).pipe(map((res) => res["payload"]));
   }
-}
+
